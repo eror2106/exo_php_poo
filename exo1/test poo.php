@@ -14,15 +14,22 @@ declare(strict_types=1); ?>
 
 	<p>je vais essaye un poo avex un achichage dans le html
 	</p>
+	<form action="" method="post">
+		<label for="">test</label>
+		<input name="variable" type="number">
+		<input type="submit">
+	</form>
 	<?php
+	$variable_i = "";
+	if (isset($_POST['variable'])) {
+		$variable_i = htmlspecialchars($_POST['variable']);
+	}
 
 	class test
 	{
 		private float $i;
 
-
-
-		public static function compte($i)
+		public  function compte($i)
 
 		{
 			for ($j = $i; $j >= 0; $j--) {
@@ -30,14 +37,19 @@ declare(strict_types=1); ?>
 			}
 		}
 
-		public function  get_i($i)
+		public function  set_i($i)
 		{
 			$this->i = $i;
 			$this->compte($i);
 		}
 	}
+
+	$convert = new NumberFormatter('de_DE', NumberFormatter::DECIMAL);
 	$test1 = new test;
-	$test1->get_i(10);
+	$test1->set_i($convert->parse($variable_i));
+
+
+
 	?>
 </body>
 
